@@ -24,6 +24,9 @@ class Request
             case 'POST':
                 $this->post = new \Zazalt\Coniunctum\Request\Adapter\Post();
                 break;
+            case 'DELETE':
+                $this->delete = new \Zazalt\Coniunctum\Request\Adapter\Delete();
+                break;
         }
     }
 
@@ -68,6 +71,6 @@ class Request
 
     public function isDelete()
     {
-
+        return ($this->delete && $this->delete->isThisMethod());
     }
 }
