@@ -24,6 +24,12 @@ class Request
             case 'POST':
                 $this->post = new \Zazalt\Coniunctum\Request\Adapter\Post();
                 break;
+            case 'PATCH':
+                $this->patch = new \Zazalt\Coniunctum\Request\Adapter\Patch();
+                break;
+            case 'PUT':
+                $this->put = new \Zazalt\Coniunctum\Request\Adapter\Put();
+                break;
             case 'DELETE':
                 $this->delete = new \Zazalt\Coniunctum\Request\Adapter\Delete();
                 break;
@@ -32,12 +38,17 @@ class Request
 
     public function fromData()
     {
-
         if($this->isGet()) {
             return $this->get->getData();
 
         } else if($this->isPost()) {
             return $this->post->getData();
+
+        } else if($this->isPatch()) {
+            return $this->patch->getData();
+
+        } else if($this->isPut()) {
+            return $this->put->getData();
         }
     }
 
@@ -59,14 +70,14 @@ class Request
         return ($this->post && $this->post->isThisMethod());
     }
 
-    public function isPut()
-    {
-
-    }
-
     public function isPatch()
     {
+        return ($this->patch && $this->patch->isThisMethod());
+    }
 
+    public function isPut()
+    {
+        return ($this->put && $this->put->isThisMethod());
     }
 
     public function isDelete()
