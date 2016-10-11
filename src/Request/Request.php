@@ -84,4 +84,9 @@ class Request
     {
         return ($this->delete && $this->delete->isThisMethod());
     }
+
+    public function header()
+    {
+        
+    }
 }
