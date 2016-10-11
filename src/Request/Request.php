@@ -85,8 +85,12 @@ class Request
         return ($this->delete && $this->delete->isThisMethod());
     }
 
-    public function header()
+    public function header($headerName)
     {
-        
+        if(isset($_SERVER['HTTP_'. strtoupper($headerName)])) {
+            return $_SERVER['HTTP_'. strtoupper($headerName)];
+        }
+
+        return null;
     }
 }
