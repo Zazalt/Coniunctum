@@ -94,6 +94,8 @@ class Request
         return null;
     }
 
+    /** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
+
     public function getFile($url)
     {
         $curl = curl_init();
