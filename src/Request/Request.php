@@ -105,4 +105,41 @@ class Request
         curl_close($curl);
         return $result;
     }
+
+    /**
+     * Return the request URL
+     *
+     * @param	boolean	$urlEncode
+     * @param	boolean	$base64encode
+     * @return	string
+     */
+    public function url($urlEncode = false, $base64encode = false, $webRoot = null)
+    {
+        if($webRoot) {
+            $whereIAm = $webRoot . $_SERVER['REQUEST_URI'];
+
+        } else {
+            $port = (($_SERVER['SERVER_PORT'] != 80) ? ':'.$_SERVER['SERVER_PORT'] : '');
+
+            // If no HTTPS
+            if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == '' || $_SERVER['HTTPS'] == 'off') {
+                $whereIAm = 'http://'. $_SERVER['SERVER_NAME'] . $port . $_SERVER['REQUEST_URI'];
+
+                // If HTTPS
+            } else {
+                $whereIAm = 'https://'. $_SERVER['SERVER_NAME'] . $port . $_SERVER['REQUEST_URI'];
+            }
+        }
+
+
+        if($urlEncode) {
+            $whereIAm = urlencode($whereIAm);
+        }
+
+        if($base64encode) {
+            $whereIAm = base64_encode($whereIAm);
+        }
+
+        return $whereIAm;
+    }
 }
