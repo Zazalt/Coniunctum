@@ -106,6 +106,34 @@ class Request
         return $result;
     }
 
+    public function request($url, $method, array $headers, array $data)
+    {
+        $httpRequest = curl_init();
+
+        curl_setopt($httpRequest, CURLOPT_RETURNTRANSFER, 1);
+
+        if(count($headers) > 0) {
+            curl_setopt($httpRequest, CURLOPT_HTTPHEADER, array("Content-Type:  text/xml"));
+        }
+
+        if(strtoupper($method) == 'POST') {
+            curl_setopt($httpRequest, CURLOPT_POST, 1);
+            if(count($data) > 0) {
+                curl_setopt($httpRequest, CURLOPT_POSTFIELDS, http_build_query($data));
+            }
+        }
+
+        curl_setopt($httpRequest, CURLOPT_HEADER, 1);
+
+        curl_setopt($httpRequest, CURLOPT_URL, $url);
+
+        $response = curl_exec($httpRequest);
+
+        curl_close($httpRequest);
+
+        return $response;
+    }
+
     /**
      * Return the request URL
      *
