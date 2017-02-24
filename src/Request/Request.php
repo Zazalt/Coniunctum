@@ -65,22 +65,22 @@ class Request
         return ($this->get && $this->get->isThisMethod());
     }
 
-    public function isPost()
+    public function isPost(): bool
     {
         return ($this->post && $this->post->isThisMethod());
     }
 
-    public function isPatch()
+    public function isPatch(): bool
     {
         return ($this->patch && $this->patch->isThisMethod());
     }
 
-    public function isPut()
+    public function isPut(): bool
     {
         return ($this->put && $this->put->isThisMethod());
     }
 
-    public function isDelete()
+    public function isDelete(): bool
     {
         return ($this->delete && $this->delete->isThisMethod());
     }
@@ -96,7 +96,7 @@ class Request
 
     /** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
 
-    public function getFile($url)
+    public function getFile(string $url)
     {
         $curl = curl_init();
         curl_setopt ($curl, CURLOPT_URL, $url);
@@ -106,7 +106,7 @@ class Request
         return $result;
     }
 
-    public function request($url, $method, array $headers, array $data)
+    public function request(string $url, string $method, array $headers, array $data)
     {
         $httpRequest = curl_init();
 
@@ -141,7 +141,7 @@ class Request
      * @param	boolean	$base64encode
      * @return	string
      */
-    public function url($urlEncode = false, $base64encode = false, $webRoot = null)
+    public function url(bool $urlEncode = false, bool $base64encode = false, $webRoot = null)
     {
         if($webRoot) {
             $whereIAm = $webRoot . $_SERVER['REQUEST_URI'];
