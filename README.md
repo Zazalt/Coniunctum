@@ -11,7 +11,7 @@ Coniunctum
 
 Requirements
 ---------------
-* php >= 5.4.0
+* php >= 7.1.0
 
 Packagist Dependencies
 ---------------
